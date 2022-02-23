@@ -1,0 +1,335 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "Country": "United States",
+        "TCO_1850": 0.84,
+        "TCO_1875": 2.97,
+        "TCO_1900": 8.41,
+        "TCO_1925": 14.65,
+        "TCO_1950": 16,
+        "TCO_1975": 20.44,
+        "TCO_1985": 19.34,
+        "TCO_2000": 21.34,
+        "TCO_2020": 14.24
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -96.999668,
+          39.715956
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Country": "United Kingdom",
+        "TCO_1850": 4.5,
+        "TCO_1875": 8.2,
+        "TCO_1900": 10.13,
+        "TCO_1925": 9.61,
+        "TCO_1950": 9.89,
+        "TCO_1975": 10.74,
+        "TCO_1985": 9.92,
+        "TCO_2000": 9.63,
+        "TCO_2020": 4.85
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.247349,
+          52.418788
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Country": "China",
+        "TCO_1850": 0.01,
+        "TCO_1875": 0.01,
+        "TCO_1900": 0.01,
+        "TCO_1925": 0.07,
+        "TCO_1950": 0.04,
+        "TCO_1975": 1.28,
+        "TCO_1985": 1.86,
+        "TCO_2000": 2.66,
+        "TCO_2020": 7.41
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.431983,
+          32.523743
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Country": "India",
+        "TCO_1850": 0.01,
+        "TCO_1875": 0.01,
+        "TCO_1900": 0.04,
+        "TCO_1925": 0.12,
+        "TCO_1950": 0.16,
+        "TCO_1975": 0.38,
+        "TCO_1985": 0.51,
+        "TCO_2000": 0.93,
+        "TCO_2020": 1.77
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.132924,
+          22.412321
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Country": "Brazil",
+        "TCO_1850": 0.01,
+        "TCO_1875": 0.01,
+        "TCO_1900": 0.11,
+        "TCO_1925": 0.18,
+        "TCO_1950": 0.36,
+        "TCO_1975": 1.41,
+        "TCO_1985": 1.33,
+        "TCO_2000": 1.95,
+        "TCO_2020": 2.2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -49.542449,
+          -11.928923
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Country": "South Africa",
+        "TCO_1850": 0.01,
+        "TCO_1875": 0.01,
+        "TCO_1900": 0.44,
+        "TCO_1925": 3.5,
+        "TCO_1950": 4.48,
+        "TCO_1975": 7.34,
+        "TCO_1985": 9.91,
+        "TCO_2000": 8.45,
+        "TCO_2020": 7.62
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.666291,
+          -29.708985
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Country": "Germany",
+        "TCO_1850": 0.45,
+        "TCO_1875": 2.44,
+        "TCO_1900": 5.57,
+        "TCO_1925": 7.14,
+        "TCO_1950": 7.3,
+        "TCO_1975": 13.85,
+        "TCO_1985": 13.44,
+        "TCO_2000": 11.05,
+        "TCO_2020": 7.69
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.62743,
+          51.196755
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Country": "Spain",
+        "TCO_1850": 0.03,
+        "TCO_1875": 0.2,
+        "TCO_1900": 0.6,
+        "TCO_1925": 0.85,
+        "TCO_1950": 1.18,
+        "TCO_1975": 5.05,
+        "TCO_1985": 5.16,
+        "TCO_2000": 7.63,
+        "TCO_2020": 4.47
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.464618,
+          40.09095
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Country": "France",
+        "TCO_1850": 0.54,
+        "TCO_1875": 1.7,
+        "TCO_1900": 3.23,
+        "TCO_1925": 5.41,
+        "TCO_1950": 4.84,
+        "TCO_1975": 9.11,
+        "TCO_1985": 7.3,
+        "TCO_2000": 6.88,
+        "TCO_2020": 4.24
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.549047,
+          46.698481
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Country": "Canada",
+        "TCO_1850": 0.02,
+        "TCO_1875": 0.47,
+        "TCO_1900": 3.81,
+        "TCO_1925": 8.03,
+        "TCO_1950": 11.22,
+        "TCO_1975": 17.21,
+        "TCO_1985": 16.38,
+        "TCO_2000": 18.52,
+        "TCO_2020": 14.2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -112.384858,
+          58.33747
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Country": "Mexico",
+        "TCO_1850": 0.01,
+        "TCO_1875": 0.01,
+        "TCO_1900": 0.07,
+        "TCO_1925": 3.63,
+        "TCO_1950": 1.09,
+        "TCO_1975": 2.75,
+        "TCO_1985": 3.78,
+        "TCO_2000": 4,
+        "TCO_2020": 2.77
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -102.289691,
+          23.920061
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Country": "Australia",
+        "TCO_1850": 0.22,
+        "TCO_1875": 0.42,
+        "TCO_1900": 2.75,
+        "TCO_1925": 4.87,
+        "TCO_1950": 6.69,
+        "TCO_1975": 12.76,
+        "TCO_1985": 15.39,
+        "TCO_2000": 18.53,
+        "TCO_2020": 15.37
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.050443,
+          -23.992438
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Country": "Sweden",
+        "TCO_1850": 0.06,
+        "TCO_1875": 0.52,
+        "TCO_1900": 1.29,
+        "TCO_1925": 2.18,
+        "TCO_1950": 4.09,
+        "TCO_1975": 9.85,
+        "TCO_1985": 7.46,
+        "TCO_2000": 6.16,
+        "TCO_2020": 3.83
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.017205,
+          65.859144
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Country": "Japan",
+        "TCO_1850": 0.01,
+        "TCO_1875": 0.04,
+        "TCO_1900": 0.44,
+        "TCO_1925": 1.38,
+        "TCO_1950": 1.24,
+        "TCO_1975": 7.73,
+        "TCO_1985": 7.49,
+        "TCO_2000": 9.91,
+        "TCO_2020": 8.15
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          138.441899,
+          36.13793
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Country": "Russia",
+        "TCO_1850": 0.01,
+        "TCO_1875": 0.08,
+        "TCO_1900": 0.71,
+        "TCO_1925": 0.4,
+        "TCO_1950": 4.03,
+        "TCO_1975": 13.64,
+        "TCO_1985": 16.4,
+        "TCO_2000": 10.05,
+        "TCO_2020": 10.81
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          93.884016,
+          63.314401
+        ]
+      }
+    }
+  ]
+}
