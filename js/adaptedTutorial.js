@@ -21,11 +21,6 @@ var geojsonMarkerOptions = {
     fillOpacity: 0.8
 };
 
-L.geoJSON(someGeojsonFeature, {
-    pointToLayer: function (feature, latlng) {
-        return L.circleMarker(latlng, geojsonMarkerOptions);
-    }
-}).addTo(map);
 
 function onEachFeature(feature, layer) {
     //no property named popupContent; instead, create html string with all properties
@@ -46,7 +41,12 @@ function getData(){
         })
         .then(function(json){
             //create a Leaflet GeoJSON layer and add it to the map
-            L.geoJson(json).addTo(map);
+            L.geoJSON(json, {
+                pointToLayer: function (feature, latlng) {
+                    return L.circleMarker(latlng, geojsonMarkerOptions);
+                }, 
+            onEachFeature: onEachFeature
+            }).addTo(map);
         })
 };
 
