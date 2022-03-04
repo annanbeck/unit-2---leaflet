@@ -1,197 +1,218 @@
-//initialize function called when the script loads
-function initialize() {
-    cities();
-    jsAjax();
-};
-//function to create a table with cities and their populations
-/*function cities() {
-    //This part of the script is creating an array of objects for cities and population.
-    var cityPop = [
-        {
-            city: 'Madison',
-            population: 233209
-        },
-        {
-            city: 'Milwaukee',
-            population: 594833
-        },
-        {
-            city: 'Green Bay',
-            population: 104057
-        },
-        {
-            city: 'Superior',
-            population: 27244
+//GOAL: Proportional symbols representing attribute values of mapped features
+//STEPS:
+//Step 1. Create the Leaflet map--already done in createMap()
+//Step 2. Import GeoJSON data--already done in getData()
+//Step 3. Add circle markers for point features to the map--already done in AJAX callback
+//Step 4. Determine the attribute for scaling the proportional symbols
+//Step 5. For each feature, determine its value for the selected attribute
+//Step 6. Give each feature's circle marker a radius based on its attribute value
+/*var map;
+
+//function to instantiate the Leaflet map
+function createMap(){
+
+    //create the map
+    map = L.map('mapid', {
+        center: [0, 0],
+        zoom: 2
+    });*/
+
+    var map = L.map('mapid').setView([20, 0], 2);
+    var minValue;
+    
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'pk.eyJ1IjoiYW5iZWNrIiwiYSI6ImNrenk4bHFlZzA2a28yb3A2ZTd3bDVjam0ifQ.xFoQ7_j1nY-jkBADN3p7dw'
+    }).addTo(map);
+    
+    getData();
+    
+    function calcMinValue(data){
+        //create empty array to store all data values
+        var allValues = [];
+        //loop through each city
+        for(var country of data.features){
+            //loop through each year
+            for(var year = 1850; year <= 2020; year+=25){
+                  //get population for current year
+                  var value = country.properties["TCO_"+ String(year)];
+                  //add value to array
+                  allValues.push(value);
+            }
         }
-    ];
-
-    //create the table element
-    var table = document.createElement("table");
-
-    //create header row
-    var headerRow = document.createElement("tr");
-
-    //label the header row
-    headerRow.insertAdjacentHTML("beforeend", "<th>City</th><th>Population</th>");
-
-    //add the row to the table
-    table.appendChild(headerRow);
-
-    //This loop creates the table
-    for (var i = 0; i < cityPop.length; i++) {
-        var tr = document.createElement("tr");
-
-        var city = document.createElement("td");
-        city.innerHTML = cityPop[i].city; 
-        tr.appendChild(city);
-
-        var pop = document.createElement("td");
-        pop.innerHTML = cityPop[i].population; 
-        tr.appendChild(pop);
-
-        table.appendChild(tr);
+        //get minimum value of our array
+        var minValue = Math.min(...allValues)
+    
+        return minValue;
+    }
+    
+    //calculate the radius of each proportional symbol
+    function calcPropRadius(attValue) {
+        //constant factor adjusts symbol sizes evenly
+        var minRadius = 5;
+        //Flannery Apperance Compensation formula
+        var radius = 1.0083 * Math.pow(attValue/minValue,0.5715) * minRadius
+    
+        return radius;
     };
-    //adds the table to the div in index.html
-    var mapid = document.querySelector("#mapid");
-    mapid.appendChild(table);
-    //These add the colums and events functions to cities, which is what is initalized
-    addColumns(cityPop);
-    addEvents();
-};
-
-
-//this function adds the city size column
-function addColumns(cityPop) {
-//this is a for each loop for the column
-    document.querySelectorAll("tr").forEach(function (row, i) {
-//the conditionals here tell it what size to return for sm and md, otherwise large
-        if (i == 0) {
-//this inserts the header city size
-            row.insertAdjacentHTML('beforeend', '<th>City Size</th>');
-        } else {
-
-            var citySize;
-
-            if (cityPop[i - 1].population < 100000) {
-                citySize = 'Small';
-
-            } else if (cityPop[i - 1].population < 500000) {
-                citySize = 'Medium';
-
-            } else {
-                citySize = 'Large';
-            };
-//this tells it to fill the rows with the conditional city sizes
-            row.insertAdjacentHTML('beforeend', '<td>' + citySize + '</td>');
+    
+    //function to convert markers to circle markers and add popups
+    function pointToLayer(feature, latlng, attributes){
+        //Determine which attribute to visualize with proportional symbols
+        var attribute = attributes[0];
+    
+        //create marker options
+        var options = {
+            fillColor: "#636363",
+            color: "#000",
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.8
         };
-    });
-};
-
-
-
-//this adds events, first a mouseover then a clickme
-function addEvents() {
-    function mouseover() {
-//this tells the mouseover function that it will respond to rgb color and to open parenthesis
-        var color = "rgb(";
-//says to do rgb variation for three numbers
-        for (var i = 0; i < 3; i++) {
-//tells it to be a random number up to 255, the number of color values in r, g, and b
-            var random = Math.round(Math.random() * 255);
-//tells us the color is random
-            color += random;
-//for the r and g colors add commas
-            if (i < 2) {
-                color += ",";
-//for the last color add a closing parenthesis
-            } else {
-                color += ")";
-            };
-
-        };
-        //references css to execute random color changes
-        document.querySelector("table").style.color = color;
+    
+        //For each feature, determine its value for the selected attribute
+        var attValue = Number(feature.properties[attribute]);
+    
+        //Give each feature's circle marker a radius based on its attribute value
+        options.radius = calcPropRadius(attValue);
+    
+        //create circle marker layer
+        var layer = L.circleMarker(latlng, options);
+    
+        //build popup content string starting with city...Example 2.1 line 24
+        var popupContent = "<p><b>Country:</b> " + feature.properties.Country + "</p>";
+    
+        //add formatted attribute to popup content string
+        var year = attribute.split("_")[1];
+        popupContent += "<p><b>Carbon Dioxide emissions in " + year + ":</b> " + feature.properties[attribute] + " tons</p>";
+    
+        //bind the popup to the circle marker
+        layer.bindPopup(popupContent, {
+              offset: new L.Point(0,-options.radius)
+          });
+    
+        //return the circle marker to the L.geoJson pointToLayer option
+        return layer;
     };
-//this is outside the function and tells it to add the mouseover function to the table
-    document.querySelector("table").addEventListener("mouseover", mouseover)
-//adds clickme function and indicates message
-    function clickme() {
-
-        alert('Hey, you clicked me!');
-    };
-//this is outside the function and tells it to execute the popup if table is clicked
-    document.querySelector("table").addEventListener("click", clickme)
-};
-
-
-//calls the initialize function when the window has loaded
-document.addEventListener('DOMContentLoaded', initialize)*/
-var map = L.map('mapid').setView([20, 0], 2);
-
-L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom: 18,
-    id: 'mapbox/streets-v11',
-    tileSize: 512,
-    zoomOffset: -1,
-    accessToken: 'pk.eyJ1IjoiYW5iZWNrIiwiYSI6ImNrenk4bHFlZzA2a28yb3A2ZTd3bDVjam0ifQ.xFoQ7_j1nY-jkBADN3p7dw'
-}).addTo(map);
-
-getData('data/co2.geojson');
-
-var geojsonMarkerOptions = {
-    radius: 8,
-    fillColor: "#ff7800",
-    color: "#000",
-    weight: 1,
-    opacity: 1,
-    fillOpacity: 0.8
-};
-
-
-function onEachFeature(feature, layer) {
-    //no property named popupContent; instead, create html string with all properties
-    var popupContent = "";
-    if (feature.properties) {
-        //loop to add feature property names and values to html string
-        for (var property in feature.properties){
-            popupContent += "<p>" + property + ": " + feature.properties[property] + "</p>";
-        }
-        layer.bindPopup(popupContent);
-    };
-};
-
-function getData(){
-    fetch("data/co2.geojson")
-    .then(function(response){
-        return response.json();
-    })
-    .then(function(json){
-        //create a Leaflet GeoJSON layer and add it to the map
-        L.geoJSON(json, {
-            pointToLayer: function (feature, latlng) {
-                return L.circleMarker(latlng, geojsonMarkerOptions);
-            }, 
-        onEachFeature: onEachFeature
+    
+    function createPropSymbols(data, attributes){
+        //create a leaflet geojson layer and add it to the map
+        L.geoJson(data, {
+            pointToLayer: function(feature, latlng){
+                return pointToLayer(feature, latlng, attributes);
+            }
         }).addTo(map);
-    })
+    };
+
+    function updatePropSymbols(attribute){
+        map.eachLayer(function(layer){
+            if (layer.feature && layer.feature.properties[attribute]){
+              //access feature properties
+               var props = layer.feature.properties;
+    
+               //update each feature's radius based on new attribute values
+               var radius = calcPropRadius(props[attribute]);
+               layer.setRadius(radius);
+    
+               //add city to popup content string
+               var popupContent = "<p><b>Country:</b> " + props.Country + "</p>";
+    
+               //add formatted attribute to panel content string
+               var year = attribute.split("_")[1];
+               popupContent += "<p><b>Carbon Dioxide emissions in " + year + ":</b> " + props[attribute] + " tons</p>";
+    
+               //update popup with new content
+               popup = layer.getPopup();
+               popup.setContent(popupContent).update();
+    
+            };
+        });
+    };
+
+    function processData(data){
+        //empty array to hold attributes
+    var attributes = [];
+
+    //properties of the first feature in the dataset
+    var properties = data.features[0].properties;
+
+    //push each attribute name into attributes array
+    for (var attribute in properties){
+        //only take attributes with population values
+        if (attribute.indexOf("TCO") > -1){
+            attributes.push(attribute);
+        };
+    };
+    return attributes;
 };
 
-/*function jsAjax(){
-	
-	var myData;
-	
+    
+    function createSequenceControls(attributes){
+        //create range input element (slider)
+        var slider = "<input class='range-slider' type='range'></input>";
+        document.querySelector("#panel").insertAdjacentHTML('beforeend',slider);
+        
+        //set slider attributes
+        document.querySelector(".range-slider").max = 9;
+        document.querySelector(".range-slider").min = 0;
+        document.querySelector(".range-slider").value = 0;
+        document.querySelector(".range-slider").step = 1;
+        
+        //add step buttons
+        document.querySelector('#panel').insertAdjacentHTML('beforeend','<button class="step" id="reverse">Reverse</button>');
+        document.querySelector('#panel').insertAdjacentHTML('beforeend','<button class="step" id="forward">Forward</button>');
+    
+        //replace button content with images
+        document.querySelector('#reverse').insertAdjacentHTML('beforeend',"<img src='img/l arrow.png'>")
+        document.querySelector('#forward').insertAdjacentHTML('beforeend',"<img src='img/R arrow.png'>")
 
-	fetch('data/co2.geojson')
-   
+        document.querySelectorAll('.step').forEach(function(step){
+            step.addEventListener("click", function(){
+                var index = document.querySelector('.range-slider').value;
+                //Step 6: increment or decrement depending on button clicked
+                if (step.id == 'forward'){
+                    index++;
+                    //Step 7: if past the last attribute, wrap around to first attribute
+                    index = index > 9 ? 0 : index;
+                } else if (step.id == 'reverse'){
+                    index--;
+                    //Step 7: if past the first attribute, wrap around to last attribute
+                    index = index < 0 ? 9 : index;
+                };
+    
+                //Step 8: update slider
+                document.querySelector('.range-slider').value = index;
+    
+                //Step 9: pass new attribute to update symbols
+                updatePropSymbols(attributes[index]);
+            })
+        })
+        document.querySelector('.range-slider').addEventListener('input', function(){
+            var index = this.value;
+
+        //Step 9: pass new attribute to update symbols
+        updatePropSymbols(attributes[index]);
+        })
+    };
+    
+    function getData(map){
+        //load the data
+        fetch("data/co2.geojson")
             .then(function(response){
                 return response.json();
-            }) 
-            .then(function(response){
-                myData = response;
-    
-                //check the data
-                console.log(myData)
-                document.querySelector("#mapid").insertAdjacentHTML('beforeend', '<br>GeoJSON data: ' + JSON.stringify(myData))
             })
-        };*/
+            .then(function(json){
+                var attributes = processData(json);
+                //calculate minimum data value
+                minValue = calcMinValue(json);
+                //call function to create proportional symbols
+                createPropSymbols(json, attributes);
+                createSequenceControls(attributes);
+            })
+    };
+    
+    document.addEventListener('DOMContentLoaded',createMap)
