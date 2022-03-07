@@ -2,23 +2,16 @@ body{
     margin:0;
 }
 .leaflet-popup-content p {
-    margin: 0.2em 0;
+    margin: 0;
+    font: 11px Verdana, sans-serif;
 }
 
-#mapid{
+#map{
     height: 100vh;
     width: 100vw;
     display: inline-block;
 }
 
-#panel {
-    width: 25%;
-    padding: 20px;
-    display: inline-block;
-    vertical-align: top;
-    text-align: center;
-    line-height: 42px;
-}
 
 .range-slider {
     width: 55%;
@@ -29,7 +22,8 @@ body{
 }
 
 .step img {
-	width: 100%;
+	width: 50%;
+    align-items: center;
 }
 
 
@@ -39,4 +33,30 @@ body{
 
 #reverse {
     float: left;
+}
+
+.sequence-control-container{
+    width: 350px;
+    height: 30px;
+    background-color: rgba(255,255,255,0.8);
+    padding: 10px;
+    line-height: 45px;
+    text-align: center;
+    border: solid gray 1px;
+    font: 11px Verdana, sans-serif;
+}
+
+.legend-control-container{
+    width: 200px;
+    background-color: rgba(255,255,255,0.8);
+    padding: 10px;
+    line-height: 15px;
+    font-weight:bold;
+    text-align: center;
+    border: solid gray 1px;
+    font: 11px Verdana, sans-serif;
+}
+
+.legend-control-container p{
+    margin: 0;
 }
