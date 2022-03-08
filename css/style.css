@@ -54,9 +54,22 @@ body{
     font-weight:bold;
     text-align: center;
     border: solid gray 1px;
-    font: 11px Verdana, sans-serif;
+    font: 15px Verdana, sans-serif;
 }
 
 .legend-control-container p{
     margin: 0;
+}
+nav {
+    position: fixed;
+    height: 70px;
+    margin-bottom: 15px;
+    top: 0;
+    right: 0;
+    left: 0;
+    background: rgba(189,189,189,0.8);
+    text-align: center;
+    border: solid gray 1px;
+    font: 15px Verdana, sans-serif;
+    font-weight: bold;
 }

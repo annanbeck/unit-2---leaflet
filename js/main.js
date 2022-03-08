@@ -297,6 +297,7 @@ function createLegend(attributes){
      
      };
 
+
     
     function createSequenceControls(attributes){
         //create range input element (slider)
@@ -308,12 +309,14 @@ function createLegend(attributes){
             onAdd: function () {
                 // create the control container div with a particular class name
                 var container = L.DomUtil.create('div', 'sequence-control-container');
+                
     
                 //create range input element (slider)
                 container.insertAdjacentHTML('beforeend', '<input class="range-slider" type="range"></input>')
               //add skip buttons
                  container.insertAdjacentHTML('beforeend', '<button class="step" id="reverse" title="Reverse"><img src="img/l arrow.png"></button>'); 
                 container.insertAdjacentHTML('beforeend', '<button class="step" id="forward" title="Forward"><img src="img/R arrow.png"></button>'); 
+                
     
               //disable any mouse event listeners for the container
               L.DomEvent.disableClickPropagation(container);
